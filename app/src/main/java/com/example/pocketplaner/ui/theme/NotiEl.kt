@@ -1,0 +1,14 @@
+package com.example.pocketplaner.ui.theme
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.Date
+
+@Entity
+data class NotiEl(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int =0,
+    var title: String,
+    var cost: Float,
+    var date: Date
+)
