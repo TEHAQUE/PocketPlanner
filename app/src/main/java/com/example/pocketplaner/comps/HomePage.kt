@@ -22,7 +22,6 @@ fun HomePage(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        NotiViewModel()
         Text(text = "Home Page",
             fontSize = 30.sp,
             fontWeight = FontWeight.SemiBold,

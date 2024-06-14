@@ -10,7 +10,7 @@ import java.sql.Date
 import java.time.Instant
 
 class NotiViewModel : ViewModel() {
-    val notiElDao = DataWrapper.notiDataBase.getNotiDao()
+    val notiElDao = DataWrapper.dataBase.getNotiDao()
 
     val notiList : LiveData<List<NotiEl>> = notiElDao.getAllNoti()
 

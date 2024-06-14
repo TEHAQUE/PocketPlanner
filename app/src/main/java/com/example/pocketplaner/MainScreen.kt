@@ -1,7 +1,6 @@
 package com.example.pocketplaner
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -17,16 +16,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import com.example.pocketplaner.comps.DashBoard
 import com.example.pocketplaner.comps.HomePage
+import com.example.pocketplaner.comps.NotifPage
+import com.example.pocketplaner.comps.OperationsPage
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
@@ -73,5 +71,7 @@ fun ContentWrapper(modifier: Modifier = Modifier, clickedBtn : Int) {
     when(clickedBtn){
         0-> HomePage()
         1-> DashBoard()
+        2-> OperationsPage()
+        3-> NotifPage()
     }
 }

@@ -2,19 +2,19 @@ package com.example.pocketplaner
 
 import android.app.Application
 import androidx.room.Room
-import com.example.pocketplaner.dataBase.NotiDataBase
+import com.example.pocketplaner.dataBase.DataBase
 
 class DataWrapper : Application() {
     companion object{
-        lateinit var notiDataBase : NotiDataBase
+        lateinit var dataBase : DataBase
     }
 
     override fun onCreate() {
         super.onCreate()
-        notiDataBase = Room.databaseBuilder(
+        dataBase = Room.databaseBuilder(
             applicationContext,
-            NotiDataBase::class.java,
-            NotiDataBase.NAME
+            DataBase::class.java,
+            DataBase.NAME
         ).build()
     }
 }
