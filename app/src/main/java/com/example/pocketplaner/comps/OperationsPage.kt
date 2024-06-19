@@ -2,6 +2,7 @@ package com.example.pocketplaner.comps
 
 import android.media.VolumeShaper.Operation
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -27,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -63,12 +66,66 @@ fun OperationsPage(modifier: Modifier = Modifier) {
             .background(Color(0xFF9477D8))
             .padding(start = 8.dp, top = 25.dp, end = 8.dp, bottom = 110.dp)
     ){
-        Row(){
-            OutlinedTextField(value = nameVal, onValueChange = {nameVal = it})
+        Text(
+            text = "Add monthly payout:",
+            fontSize = 30.sp,
+            color = Color.White,
 
-            OutlinedTextField(value = costVal, onValueChange = {costVal = it})
+            modifier = Modifier.padding(8.dp)
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ){
+            OutlinedTextField(
+                modifier = Modifier
+                    .weight(2f)
+                    .padding(end = 12.dp)
+                    .border(2.dp, Color(0xFF381D77), RoundedCornerShape(8.dp)),
+                value = nameVal,
+                onValueChange = {nameVal = it} ,
+                placeholder = {
+                    Text(
+                        "Payout name",
+                        style = TextStyle(color = Color.White, fontSize = 21.sp)
+                    )
+                },
+                textStyle =  TextStyle(color = Color.White, fontSize = 21.sp)
+            )
+
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .weight(1f)
+                    .border(2.dp, Color(0xFF381D77), RoundedCornerShape(8.dp)),
+                value = costVal,
+                onValueChange = {costVal = it} ,
+                placeholder = {
+                    Text(
+                        "Price",
+                        style = TextStyle(color = Color.White, fontSize = 21.sp)
+                    )
+                }
+            )
         }
-        Text(text = "Subscriptions")
+        Button(
+            onClick = { /* TODO */ },
+            shape = RoundedCornerShape(6.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 2.dp)
+
+        ) {
+            Text(text = "Add")
+        }
+        Text(
+            text = "Your payouts:",
+            fontSize = 30.sp,
+            color = Color.White,
+
+            modifier = Modifier.padding(8.dp)
+        )
         LazyColumn(
             content = {
                 itemsIndexed(subList) { index: Int, item: SubEl ->
