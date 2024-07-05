@@ -23,16 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pocketplaner.R
 import com.example.pocketplaner.ui.theme.NotiEl
-import com.example.pocketplaner.ui.theme.getFakeNoti
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
 fun NotifPage(){
-    
-    val notiList = getFakeNoti()
+
 //    Text(text = notiList.toString())
-    
+
     Column(
         modifier = Modifier
 //            .fillMaxSize()
@@ -41,9 +39,9 @@ fun NotifPage(){
     ){
         LazyColumn(
             content = {
-                itemsIndexed(notiList) { index: Int, item: NotiEl ->
-                    NotiElItem(item = item)
-                }
+//                itemsIndexed(notiList) { index: Int, item: NotiEl ->
+//                    NotiElItem(item = item)
+//                }
             }
         )
     }
@@ -69,7 +67,7 @@ fun NotiElItem(item: NotiEl){
             Text(text = SimpleDateFormat("HH:mm, dd.mm.yyyy", Locale.UK).format(item.date),
                 fontSize = 15.sp,
                 color = Color(0xFF464646)
-                )
+            )
             Text(text = item.title,
                 fontSize = 20.sp,
                 color = Color.White
