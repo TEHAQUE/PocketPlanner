@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.lifecycle.ViewModelProvider
 import com.example.pocketplaner.comps.DashBoard
 import com.example.pocketplaner.comps.NotifPage
 import com.example.pocketplaner.comps.OperationsPage
