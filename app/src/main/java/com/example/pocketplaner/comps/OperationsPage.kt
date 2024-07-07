@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -59,6 +60,7 @@ fun OperationsPage(modifier: Modifier = Modifier, viewModel: NotiViewModel) {
         modifier = Modifier
             .background(Color(0xFF9477D8))
             .padding(start = 8.dp, top = 25.dp, end = 8.dp, bottom = 110.dp)
+            .fillMaxHeight()
     ) {
         Text(
             text = "Add monthly payout:",
@@ -98,7 +100,8 @@ fun OperationsPage(modifier: Modifier = Modifier, viewModel: NotiViewModel) {
                         "Price",
                         style = TextStyle(color = Color.White, fontSize = 21.sp)
                     )
-                }
+                },
+                textStyle = TextStyle(color = Color.White, fontSize = 21.sp)
             )
         }
         Button(
@@ -156,6 +159,11 @@ fun NotiListItem(item: NotiEl, onDelete: () -> Unit) {
                 color = Color.White
             )
         }
+        Text(
+            text = "${item.cost}",
+            fontSize = 25.sp,
+            color = Color.White
+        )
         IconButton(onClick = { onDelete() }) {
             Icon(
                 painter = painterResource(id = R.drawable.baseline_hide_source_24),

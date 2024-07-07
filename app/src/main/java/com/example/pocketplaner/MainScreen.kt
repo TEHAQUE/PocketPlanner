@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -21,22 +22,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.lifecycle.ViewModelProvider
 import com.example.pocketplaner.comps.DashBoard
-import com.example.pocketplaner.comps.HomePage
 import com.example.pocketplaner.comps.NotifPage
 import com.example.pocketplaner.comps.OperationsPage
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pocketplaner.comps.Settings
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
     val viewModel: NotiViewModel = viewModel()
 
     val navItemList = listOf(
-        ItemNav("Home", Icons.Default.Home),
         ItemNav("Dashboard", Icons.Default.List),
         ItemNav("Operations", Icons.Default.Add),
         ItemNav("Notifications", Icons.Default.Notifications),
+        ItemNav("Settings", Icons.Default.Settings),
     )
     var clickedBtn by remember {
         mutableIntStateOf(0)
@@ -73,9 +73,9 @@ fun MainScreen(modifier: Modifier = Modifier) {
 @Composable
 fun ContentWrapper(modifier: Modifier = Modifier, clickedBtn: Int, viewModel: NotiViewModel) {
     when (clickedBtn) {
-        0 -> HomePage()
-        1 -> DashBoard()
-        2 -> OperationsPage(viewModel = viewModel)
-        3 -> NotifPage()
+        0 -> DashBoard(viewModel = viewModel)
+        1 -> OperationsPage(viewModel = viewModel)
+        2 -> NotifPage(viewModel = viewModel)
+        3 -> Settings(viewModel = viewModel)
     }
 }
