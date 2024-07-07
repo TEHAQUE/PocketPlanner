@@ -1,11 +1,11 @@
 package com.example.pocketplaner.comps
 
-import android.media.VolumeShaper.Operation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,8 +19,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -31,21 +30,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pocketplaner.NotiViewModel
 import com.example.pocketplaner.R
 import com.example.pocketplaner.ui.theme.NotiEl
-import com.example.pocketplaner.ui.theme.SubEl
-import com.example.pocketplaner.ui.theme.getFakeSub
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun OperationsPage(modifier: Modifier = Modifier) {
+fun OperationsPage(modifier: Modifier = Modifier, viewModel: NotiViewModel) {
 
-    val subList = getFakeSub()
+    val notiList by viewModel.notiList.observeAsState(emptyList())
     var nameVal by remember {
         mutableStateOf("")
     }
@@ -62,60 +58,62 @@ fun OperationsPage(modifier: Modifier = Modifier) {
     val floatValue = convertToFloat(costVal)
     Column(
         modifier = Modifier
-//            .fillMaxSize()
             .background(Color(0xFF9477D8))
             .padding(start = 8.dp, top = 25.dp, end = 8.dp, bottom = 110.dp)
-    ){
+            .fillMaxHeight()
+    ) {
         Text(
             text = "Add monthly payout:",
             fontSize = 30.sp,
             color = Color.White,
-
             modifier = Modifier.padding(8.dp)
         )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
-        ){
+        ) {
             OutlinedTextField(
                 modifier = Modifier
                     .weight(2f)
                     .padding(end = 12.dp)
                     .border(2.dp, Color(0xFF381D77), RoundedCornerShape(8.dp)),
                 value = nameVal,
-                onValueChange = {nameVal = it} ,
+                onValueChange = { nameVal = it },
                 placeholder = {
                     Text(
                         "Payout name",
                         style = TextStyle(color = Color.White, fontSize = 21.sp)
                     )
                 },
-                textStyle =  TextStyle(color = Color.White, fontSize = 21.sp)
+                textStyle = TextStyle(color = Color.White, fontSize = 21.sp)
             )
-
 
             OutlinedTextField(
                 modifier = Modifier
                     .weight(1f)
                     .border(2.dp, Color(0xFF381D77), RoundedCornerShape(8.dp)),
                 value = costVal,
-                onValueChange = {costVal = it} ,
+                onValueChange = { costVal = it },
                 placeholder = {
                     Text(
                         "Price",
                         style = TextStyle(color = Color.White, fontSize = 21.sp)
                     )
-                }
+                },
+                textStyle = TextStyle(color = Color.White, fontSize = 21.sp)
             )
         }
         Button(
-            onClick = { /* TODO */ },
+            onClick = {
+                viewModel.addNoti(nameVal, floatValue)
+                nameVal = ""
+                costVal = ""
+            },
             shape = RoundedCornerShape(6.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp, vertical = 2.dp)
-
         ) {
             Text(text = "Add")
         }
@@ -123,20 +121,20 @@ fun OperationsPage(modifier: Modifier = Modifier) {
             text = "Your payouts:",
             fontSize = 30.sp,
             color = Color.White,
-
             modifier = Modifier.padding(8.dp)
         )
         LazyColumn(
             content = {
-                itemsIndexed(subList) { index: Int, item: SubEl ->
-                    SubListItem(item = item)
+                itemsIndexed(notiList) { index: Int, item: NotiEl ->
+                    NotiListItem(item = item, onDelete = { viewModel.deleteNoti(item.id) })
                 }
             }
         )
     }
 }
+
 @Composable
-fun SubListItem(item: SubEl){
+fun NotiListItem(item: NotiEl, onDelete: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -144,25 +142,31 @@ fun SubListItem(item: SubEl){
             .clip(RoundedCornerShape(6.dp))
             .background(Color(0xFFD0BCFF)),
         verticalAlignment = Alignment.CenterVertically
-    )
-    {
+    ) {
         Column(
             modifier = Modifier
                 .padding(8.dp)
                 .weight(1f)
-        )
-        {
-            Text(text = SimpleDateFormat("HH:mm, dd.mm.yyyy", Locale.UK).format(item.date),
+        ) {
+            Text(
+                text = SimpleDateFormat("HH:mm, dd.MM.yyyy", Locale.UK).format(item.date),
                 fontSize = 15.sp,
                 color = Color(0xFF464646)
             )
-            Text(text = item.title,
+            Text(
+                text = item.title,
                 fontSize = 20.sp,
                 color = Color.White
             )
         }
-        IconButton(onClick = {}) {
-            Icon(painter = painterResource(id = R.drawable.baseline_hide_source_24),
+        Text(
+            text = "${item.cost}",
+            fontSize = 25.sp,
+            color = Color.White
+        )
+        IconButton(onClick = { onDelete() }) {
+            Icon(
+                painter = painterResource(id = R.drawable.baseline_hide_source_24),
                 contentDescription = "Delete",
                 tint = Color.White
             )

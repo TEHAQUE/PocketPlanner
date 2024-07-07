@@ -14,19 +14,19 @@ data class NotiEl(
     var date: Date
 )
 
-fun getFakeNoti(): List<NotiEl>{
-    return listOf<NotiEl>(
-        NotiEl(1,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(2,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(3,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(1,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(2,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(3,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(1,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(2,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(3,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(1,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(2,"Witam",34.53F,Date.from(Instant.now())),
-        NotiEl(3,"Witam",34.53F,Date.from(Instant.now()))
-    )
-}
+//fun getFakeNoti(): List<NotiEl>{
+//    return listOf<NotiEl>(
+//        NotiEl(1,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(2,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(3,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(1,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(2,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(3,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(1,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(2,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(3,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(1,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(2,"Witam",34.53F,Date.from(Instant.now())),
+//        NotiEl(3,"Witam",34.53F,Date.from(Instant.now()))
+//    )
+//}
